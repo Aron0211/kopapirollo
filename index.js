@@ -43,3 +43,4 @@ function kivalaszt(){
   console.log(event.target.id)
   kep.src="kepek/ko.png"
 }
+
