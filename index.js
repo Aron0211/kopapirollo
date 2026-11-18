@@ -37,10 +37,57 @@ function megjelenit(){
     
 }
 
-function kivalaszt(){
+function kivalaszt(event){
   const kep=document.querySelector("#jatekos img")
-  console.log(kep)
+  console.log(event.target)
   console.log(event.target.id)
-  kep.src="kepek/ko.png"
+  kep.src=`kepek/${event.target.id}.PNG`
+  gepValasztasa(event.target.id)
 }
+
+function gepValasztasa(jValasztasa){
+  //meg kell fogni a gép képet//
+  //generálunk egy véletlen számot - véletlen számnak megfelelően ko.Png...//
+  const kep = document.querySelector("#gep img")
+  console.log(kep)
+  let veletlen =Math.floor(Math.random()*3)
+  console.log(veletlen)
+  if (veletlen == 1){
+    kep.src = "kepek/ko.PNG"
+  }else if(veletlen == 1){
+    kep.src = "kepek/papir.PNG"
+  }else{
+    kep.src = "kepek/ollo.PNG"
+  }
+  ellenorzes(veletlen, jValasztasa)
+}
+function ellenorzes(veletlen, jValasztasa){
+// össze kell hasonlítani a gép választását és a játékos választását//
+//gép választása: veletlen//
+//játékos választása: event.target.id//
+
+//ezek a feltételek amikor a játékos nyer//
+let f1 =(jValasztasa == "ko" && veletlen == 2)
+let f2 =(jValasztasa == "papir" && veletlen == 0)
+let f3 =(jValasztasa == "ollo" && veletlen == 1)
+
+let f4 =(jValasztasa == "ko" && veletlen == 1)
+let f5 =(jValasztasa == "papir" && veletlen == 2)
+let f6 =(jValasztasa == "ollo" && veletlen == 0)
+
+let szoveg =""
+if(f1 || f2 || f3){
+  szoveg = "Játékos nyert"
+}else if(f4 || f5 || f6 ){
+  szoveg = "Gép nyert"
+}else{
+  szoveg = "döntetlen"
+}
+
+const kiirElem=document.getElementById("gyoztes")
+kiirElem.innerHTML=`<p>IDE írom a győztes nevét</p>`
+
+}
+
+
 
